@@ -31,6 +31,8 @@ print("Prompt:", messages)
 def execute_model():
     while True:
         user_input = input("Ask maths question > ")
+        if user_input.lower() == "exit" or "bye":
+            break
         messages.append(
             {"role": "user", "content": user_input},
         )
