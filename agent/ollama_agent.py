@@ -6,7 +6,6 @@ from tools.sample_tool import add_two_numbers, subtract_two_numbers_tool
 
 model_id = "llama-3b-npu"
 
-# Construct the path to the JSON file
 json_path = os.path.join(
     os.path.dirname(__file__), "..", "prompts", "system_prompt.json"
 )
@@ -31,7 +30,7 @@ print("Prompt:", messages)
 def execute_model():
     while True:
         user_input = input("Ask maths question > ")
-        if user_input.lower() == "exit" or "bye":
+        if user_input.lower() == "exit":
             break
         messages.append(
             {"role": "user", "content": user_input},
