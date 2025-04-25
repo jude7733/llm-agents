@@ -1,10 +1,9 @@
 from ollama import ChatResponse, chat
 import json
 import os
+from config.spec import model_id
 
 from tools.sample_tool import add_two_numbers, subtract_two_numbers_tool
-
-model_id = "llama-3b-npu"
 
 json_path = os.path.join(
     os.path.dirname(__file__), "..", "prompts", "system_prompt.json"
