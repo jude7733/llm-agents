@@ -2,8 +2,7 @@ from ollama import ChatResponse, chat
 import json
 import os
 from config.spec import model_id
-
-from tools.sample_tool import add_two_numbers, subtract_two_numbers_tool
+from tools.tools import math_tools
 
 json_path = os.path.join(
     os.path.dirname(__file__), "..", "prompts", "system_prompt.json"
@@ -14,15 +13,13 @@ with open(json_path, "r") as f:
     system_prompts = json.load(f)
 
 
-available_functions = {
-    "add_two_numbers": add_two_numbers,
-    "subtract_two_numbers": subtract_two_numbers_tool,
-}
+available_functions = {tool.__name__: tool for tool in math_tools}
 
 messages = [
     system_prompts,
 ]
 
+print("tools available:", available_functions.keys())
 print("Prompt:", messages)
 
 
@@ -37,7 +34,7 @@ def execute_model():
         response: ChatResponse = chat(
             model_id,
             messages=messages,
-            tools=[add_two_numbers, subtract_two_numbers_tool],
+            tools=math_tools,
         )
 
         if response.message.tool_calls:
