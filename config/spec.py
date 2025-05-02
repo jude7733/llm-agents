@@ -1,1 +1,1 @@
-model_id = "llama-3b-npu"
+model_id = "qwen3:1.7b"
